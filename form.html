@@ -1,0 +1,65 @@
+<html>
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        style.css .label {
+            float: left;
+            width: 120px;
+        }
+
+        .infobox {
+            width: 200px;
+        }
+
+        .error {
+            color: red;
+            padding-left: 10px;
+        }
+
+        .submit {
+            margin-left: 125px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Data Suhu Ruangan</h1>
+    <h3>05211840000128</h3>
+    <br>
+
+    <script>
+        $(document).ready(function () { //ready() method menentukan apa yang terjadi ketika event ready terjadi
+            $('.error').hide(); //hide() method menyembunyikan elemen yang dipilih
+            $('.submit').click(function (event) {   //melakukan jika tombol class css dengan nama submit di klik
+                var data = $('.infobox').val(); //membaca isi textbox dengan class css bernama infobox
+                var len = data.length;  //length property mengembalikan panjang string (jumlah karakter).
+                var c;  //variabel adalah wadah untuk menyimpan nilai data.
+                for (var i = 0; i < len; i++) {
+                    c = data.charAt(i).charCodeAt(0);
+                    if (c == 45 && i == 0) { //mengallow atau memperbolehkan menginput angka negatif 
+                        continue;
+                    }
+                    if (c < 48 || c > 57) { //mengallow atau memperbolehkan menginput angka
+                        $('.error').show();
+                        event.preventDefault();
+                        break;
+                    }
+                    else {                  //error apabila yang di input bukan angka baik positif maupun negatif
+                        $('.error').hide();
+                    }
+                }
+            });
+        }); 
+    </script>
+
+    <form id="signup" method="post" action="">
+        <div><span class="label">Suhu Ruangan </span><input type="text" class="infobox" name="age" /><span class="error">
+                Hanya Bisa Menginput Angka </span></div>
+        <input class="submit" type="submit" value="Submit">
+    </form>
+
+</body>
+
+</html>
